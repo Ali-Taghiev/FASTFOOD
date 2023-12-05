@@ -28,7 +28,8 @@ namespace FASTFOOD
         // Method to create and return a SQL Server connection string
         public string GetConnectionString()
         {
-            return $"Server={Server};Database={Database};User Id={Username};Password={Password};";
+            return $"Server={Server};Database={Database};Integrated Security=true;TrustServerCertificate=true;";
+
         }
 
         // Method to establish a SqlConnection using the connection string
