@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FASTFOOD"
         mc:Ignorable="d"
-    Title="MainWindow" Height="550" Width="400" ResizeMode="CanMinimize">
+    Title="Log In" Height="550" Width="400" ResizeMode="CanMinimize"
+        Icon="FastFoodAppIcon.ico"
+        >
     <Grid>
         <Label Content="LOGIN" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
         <Rectangle Fill="#FF4F92FF" HorizontalAlignment="Left" Height="27" Margin="0,19.5,0,0" VerticalAlignment="Top" Width="7"/>

@@ -97,5 +97,11 @@
   <ItemGroup>
     <Resource Include="user.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FastFoodAppIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.md" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
