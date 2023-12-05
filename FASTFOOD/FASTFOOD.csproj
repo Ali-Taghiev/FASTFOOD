@@ -117,5 +117,11 @@
   <ItemGroup>
     <Resource Include="DataBaseFileForFastFood.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="User\DashBoardImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="User\user.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

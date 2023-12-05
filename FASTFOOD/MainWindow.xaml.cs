@@ -66,6 +66,7 @@ namespace FASTFOOD
 
                                 if (VerifyPassword(password, storedPasswordHash))
                                 {
+                                    this.Hide();
                                     DashBoard form = new DashBoard();
                                     form.Show();
                                 }

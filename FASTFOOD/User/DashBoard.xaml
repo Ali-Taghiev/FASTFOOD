@@ -5,8 +5,86 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FASTFOOD.User"
         mc:Ignorable="d"
-        Title="DashBoard" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+          Title="FastFood - Dashboard" MinHeight="450" MinWidth="600"  Height="720" Width="1280">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+        <!--<Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border Background="White">
+                <Grid Margin="15,0">
+                    <Image Source="DashBoardImage.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,5" Height="36" />
+                    <TextBlock FontFamily="/FastFood;component/Fonts/#Contrail One"
+ FontSize="34" Text="FastFood" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="38,0,0,0"></TextBlock>
+
+                </Grid>
+                <Border.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="0" Softness="1" ShadowDepth="0" Opacity="0.8" />
+                </Border.BitmapEffect>
+            </Border>
+
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <Grid Height="3024">
+                    <Label FontSize="28px" FontWeight="Bold">Example.</Label>
+                    <Label Margin="0,45,0,0">Exaple</Label>
+                </Grid>
+            </ScrollViewer>
+        </Grid>-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+            <Border Background="#FF53C753" Grid.Column="0" Panel.ZIndex="1" HorizontalAlignment="Left">
+                <Grid Margin="0">
+                    <TextBlock FontFamily="/FastFood;component/#Contrail One" FontSize="34" Text="FastFood" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="38,0,0,0"></TextBlock>
+
+                </Grid>
+            </Border>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60px" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Background="White">
+                    <Grid Margin="15,0">
+                        <Image Source="DashBoardImage.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,5" Height="36" />
+                        <TextBlock FontFamily="/FastFood;component/Resources/#Contrail One" FontSize="34" Text="FastFood" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="38,0,0,0"></TextBlock>
+                        <Image Source="/FastFood;component/user.png" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0" Height="32" >
+                            <Image.OpacityMask>
+                                <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                                    <GradientStop Color="#ffffffff" Offset="1" />
+                                    <GradientStop Color="#00ffffff" Offset="1" />
+                                </RadialGradientBrush>
+                            </Image.OpacityMask>
+                        </Image>
+                        <TextBlock TextAlignment="Left" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" FontSize="14" Margin="0,0,26,0" Foreground="#FF53C753">Administrador</TextBlock>
+                    </Grid>
+                    <Border.BitmapEffect>
+                        <DropShadowBitmapEffect Color="Black" Direction="0" Softness="1" ShadowDepth="0" Opacity="0.8" />
+                    </Border.BitmapEffect>
+                </Border>
+
+
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <Grid Height="3024">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="295*"/>
+                            <RowDefinition Height="2729*"/>
+                        </Grid.RowDefinitions>
+                        <Label FontSize="28px" FontWeight="Bold" Grid.RowSpan="2">This is just a demo.</Label>
+                        <Label Margin="0,45,0,0" Grid.RowSpan="2">Yes, that's true!</Label>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+
+        </Grid>
+
+    </ScrollViewer>
+
+
 </Window>
