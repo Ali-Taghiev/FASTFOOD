@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,14 @@ namespace FASTFOOD
         public MainWindow()
         {
             InitializeComponent();
+
+            SqlConnectionConfiguration sqlConfig = new SqlConnectionConfiguration();
+
+            // Get connection string
+            string connectionString = sqlConfig.GetConnectionString();
+         
+
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

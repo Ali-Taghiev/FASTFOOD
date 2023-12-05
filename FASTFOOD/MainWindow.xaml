@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FASTFOOD"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
     Title="Log In" Height="550" Width="400" ResizeMode="CanMinimize"
         Icon="FastFoodAppIcon.ico"
         >

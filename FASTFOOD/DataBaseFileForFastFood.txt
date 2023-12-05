@@ -1,0 +1,93 @@
+CREATE TABLE Users (
+   id bigint IDENTITY(1,1) NOT NULL,
+  name varchar(40) NOT NULL,
+  username varchar(20) NOT NULL,
+  password varchar(150) NOT NULL,
+  email varchar(60) NOT NULL,
+  token varchar(150) NULL,
+
+ CONSTRAINT PK_Users PRIMARY KEY (id),
+  CONSTRAINT UQ_id UNIQUE (id),
+  CONSTRAINT UQ_username UNIQUE (username),
+  CONSTRAINT UQ_email UNIQUE (email),
+  INDEX IX_id_2 (id)
+);
+
+
+
+CREATE TABLE Consumptions (
+  id bigint IDENTITY(1,1) NOT NULL,
+  serviceID bigint NOT NULL,
+  productID bigint NOT NULL,
+  PRIMARY KEY (id)
+);
+
+
+CREATE TABLE Products (
+  id bigint IDENTITY(1,2) NOT NULL,
+  name varchar(50) NOT NULL,
+  description varchar(250) NULL,
+  price decimal(6,2) NULL,
+  image varbinary(MAX) NULL,
+  PRIMARY KEY (id)
+);
+
+
+CREATE TABLE Services (
+  id bigint IDENTITY(1,1) NOT NULL,
+  start datetime NOT NULL,
+  [end] datetime NULL,
+  PRIMARY KEY (id),
+  UNIQUE (id)
+);
+
+
+CREATE TABLE tables (
+  id bigint NOT NULL,
+  description varchar(150) NULL,
+  actualServiceID bigint NULL,
+  PRIMARY KEY (id)
+);
+
+INSERT INTO Users (name, username, password, email, token)
+VALUES ('Ali Taghiev', 'Ali', '12345', 'Ali@gmail.com', NULL);
+
+
+
+INSERT INTO Products (name, description, price, image)
+VALUES ('Pizza', '', 12.50, NUll);
+
+INSERT INTO Products (name, description, price, image)
+VALUES ('Mediterranean Delight', NULL, 16.99,Null );
+
+
+INSERT INTO tables (id, description, actualServiceID)
+VALUES
+(1, NULL, NULL),
+(2, NULL, NULL),
+(3, NULL, NULL),
+(4, NULL, NULL),
+(5, NULL, NULL),
+(6, NULL, NULL),
+(7, NULL, NULL),
+(8, NULL, NULL),
+(9, NULL, NULL);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
