@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,12 +31,16 @@ namespace FASTFOOD
 
             // Get connection string
             string connectionString = sqlConfig.GetConnectionString();
-         
 
-            
+
+
         }
 
         private void Login_btnClick(object sender, RoutedEventArgs e)
+        {
+            Login();
+        }
+        private void Login()
         {
             string username = txtboxUserName.Text;
             string password = txtboxPassword.Text;
@@ -57,23 +62,21 @@ namespace FASTFOOD
                         {
                             if (dr.Read())
                             {
-                                string storedPassword = dr["password"].ToString();
+                                string storedPasswordHash = dr["password"].ToString();
 
-                                // Check if the provided password matches the stored password
-                                if (VerifyPassword(password, storedPassword))
+                                if (VerifyPassword(password, storedPasswordHash))
                                 {
-                                    // Successful login
                                     DashBoard form = new DashBoard();
                                     form.Show();
                                 }
                                 else
                                 {
-                                    // Invalid password, handle accordingly
+                                    MessageBox.Show("Invalid password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                             else
                             {
-                                // Invalid username, handle accordingly
+                                MessageBox.Show("Invalid username.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                     }
@@ -83,16 +86,39 @@ namespace FASTFOOD
             {
                 MessageBox.Show($"An error occurred: {exc.ToString()}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
-        // Method to verify password (you should implement your own secure password hashing mechanism)
-        private bool VerifyPassword(string enteredPassword, string storedPassword)
+        private bool VerifyPassword(string enteredPassword, string storedPasswordHash)
         {
-            // Implement your password verification logic here (e.g., using a secure hashing algorithm)
-            // For demonstration purposes, a simple string comparison is used here.
-            return enteredPassword == storedPassword;
+            string enteredPasswordHash = ComputeSha256Hash(enteredPassword);
+            return string.Equals(enteredPasswordHash, storedPasswordHash, StringComparison.OrdinalIgnoreCase);
         }
 
+        private string ComputeSha256Hash(string input)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < hashedBytes.Length; i++)
+                {
+                    builder.Append(hashedBytes[i].ToString("x2"));
+                }
+
+                return builder.ToString();
+            }
+        }
+
+
+        
+        private void Login_EnterKey(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Login();
+            }
+
+        }
     }
 }
