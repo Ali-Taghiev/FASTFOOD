@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FASTFOOD.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,6 +64,11 @@ namespace FASTFOOD.User
             
             App.Current.MainWindow.Show();
             this.Close();
+        }
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            settings form = new settings();
+            form.ShowDialog();
         }
 
 
