@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FASTFOOD"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+    Title="MainWindow" Height="550" Width="400" ResizeMode="CanMinimize">
     <Grid>
-        
+        <Label Content="LOGIN" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+        <Rectangle Fill="#FF4F92FF" HorizontalAlignment="Left" Height="27" Margin="0,19.5,0,0" VerticalAlignment="Top" Width="7"/>
+        <TextBox x:Name="txtboxUserName" Height="26" Margin="102,296,102,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#F0F0F0" BorderThickness="2.5" BorderBrush="#FF4F92FF" FontSize="14" />
+        <Label Content="Username" HorizontalAlignment="Left" Margin="102,267,0,0" VerticalAlignment="Top" FontStyle="Italic" Width="128" Padding="0,5,5,5" FontSize="14"/>
+        <TextBox x:Name="txtboxPassword" Height="26" Margin="102,362,102,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#F0F0F0" BorderThickness="2.5" BorderBrush="#FF4F92FF" FontSize="14"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="102,333,0,0" VerticalAlignment="Top" FontStyle="Italic" Width="128" Padding="0,5,5,5" FontSize="14"/>
+       
+        <Button x:Name="btnLogin" Content="LOGIN" Margin="117,432,117,0" VerticalAlignment="Top" Click="Button_Click" Background="#FF4F92FF" Foreground="White" BorderBrush="#FF4F92FF" Height="40" FontWeight="Bold" FontSize="12.5">
+            <Button.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black" Direction="0" Softness="1" ShadowDepth="0" Opacity="0.2" />
+            </Button.BitmapEffect>
+        </Button>
+        <Image  Source="user.png" Stretch="Fill" Margin="114,77,114,286">
+            <Image.OpacityMask>
+                <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                    <GradientStop Color="#ffffffff" Offset="1" />
+                    <GradientStop Color="#00ffffff" Offset="1" />
+                </RadialGradientBrush>
+            </Image.OpacityMask>
+        </Image>
+
+
+
     </Grid>
 </Window>
