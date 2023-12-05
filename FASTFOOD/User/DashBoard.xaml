@@ -4,47 +4,62 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FASTFOOD.User"
+        
+          xmlns:fa5="http://schemas.fontawesome.com/icons/" 
         mc:Ignorable="d"
-          Title="FastFood - Dashboard" MinHeight="450" MinWidth="600"  Height="720" Width="1280">
+        
+        Title="FastFood - Dashboard" MinHeight="450" MinWidth="600" Height="720" Width="1280" WindowState="Maximized">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-        <!--<Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
 
-            <Border Background="White">
-                <Grid Margin="15,0">
-                    <Image Source="DashBoardImage.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,5" Height="36" />
-                    <TextBlock FontFamily="/FastFood;component/Fonts/#Contrail One"
- FontSize="34" Text="FastFood" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="38,0,0,0"></TextBlock>
-
-                </Grid>
-                <Border.BitmapEffect>
-                    <DropShadowBitmapEffect Color="Black" Direction="0" Softness="1" ShadowDepth="0" Opacity="0.8" />
-                </Border.BitmapEffect>
-            </Border>
-
-            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                <Grid Height="3024">
-                    <Label FontSize="28px" FontWeight="Bold">Example.</Label>
-                    <Label Margin="0,45,0,0">Exaple</Label>
-                </Grid>
-            </ScrollViewer>
-        </Grid>-->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="60" x:Name="sidebar"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <Border Background="#FF53C753" Grid.Column="0" Panel.ZIndex="1">
+                <Grid>
+                    <StackPanel VerticalAlignment="Top">
+                        <Button Height="60" Background="Transparent" x:Name="btnHome" Click="btnHome_Click" BorderThickness="0">
+                            <DockPanel Margin="20,0,0,0">
+                                <Image Source="/User/Icons/MenuIcon.ico" Width="20" />
+                                <Label  FontWeight="DemiBold" FontSize="13" x:Name="lbl_Governance" Foreground="White" Margin="15,0,0,0" />
+                            </DockPanel>
+                        </Button>
+                        <Button Height="60" Background="Transparent" x:Name="btnScan" BorderThickness="0">
+                            <DockPanel  Margin="20,0,0,0">
+                                <Image Source="/User/Icons/KnifeIcon.ico" Width="20" />
+                                <Label Content="Tables" Foreground="White" FontWeight="DemiBold" FontSize="13" Margin="15,0,0,0"/>
+                            </DockPanel>
+                        </Button>
+                        <Button Height="60" Background="Transparent" x:Name="btnMenu" BorderThickness="0">
+                            <DockPanel  Margin="20,0,0,0">
+                                <Image Source="/User/Icons/KnifeIcon.ico" Width="20" />
+                                <Label Content="Manage letter" Foreground="White" FontWeight="DemiBold" FontSize="13" Margin="15,0,0,0"/>
+                            </DockPanel>
+                        </Button>
 
-            <Border Background="#FF53C753" Grid.Column="0" Panel.ZIndex="1" HorizontalAlignment="Left">
-                <Grid Margin="0">
-                    <TextBlock FontFamily="/FastFood;component/#Contrail One" FontSize="34" Text="FastFood" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="38,0,0,0"></TextBlock>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Bottom">
+                        <Button Height="60" Background="Transparent" x:Name="btnSettings" BorderThickness="0" >
+                            <DockPanel  Margin="20,0,0,0">
+                                <Image Source="/User/Icons/settingIcon.ico" Width="20" />
+                                <Label Content="Settings" Foreground="White" FontWeight="SemiBold" FontSize="13" x:Name="lbl_Issues" Margin="15,0,0,0"/>
+                            </DockPanel>
+                        </Button>
 
+                        <Button Height="60" Background="Transparent" x:Name="btnExit" Click="btnExit_Click" BorderThickness="0">
+                            <DockPanel  Margin="20,0,0,0">
+                                <Image Source="/User/Icons/LogOutIcon.ico" Width="20" />
+                                <Label Content="Log Out" Foreground="White" FontWeight="DemiBold" FontSize="14" x:Name="lbl_Migration" Margin="15,0,0,0" />
+                            </DockPanel>
+                        </Button>
+
+                    </StackPanel>
                 </Grid>
+
             </Border>
+
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60px" />
@@ -76,8 +91,8 @@
                             <RowDefinition Height="295*"/>
                             <RowDefinition Height="2729*"/>
                         </Grid.RowDefinitions>
-                        <Label FontSize="28px" FontWeight="Bold" Grid.RowSpan="2">This is just a demo.</Label>
-                        <Label Margin="0,45,0,0" Grid.RowSpan="2">Yes, that's true!</Label>
+                        <Label FontSize="28px" FontWeight="Bold" Grid.RowSpan="2">Example</Label>
+                        <Label Margin="0,45,0,0" Grid.RowSpan="2">Example</Label>
                     </Grid>
                 </ScrollViewer>
             </Grid>
