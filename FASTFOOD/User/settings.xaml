@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FASTFOOD.User"
         mc:Ignorable="d"
-        Title="Configuración" Height="450" Width="800" MinHeight="450" MinWidth="550" WindowStartupLocation="CenterScreen">
+        Title="Configuración" Height="450" Width="800" MinHeight="450" MinWidth="550" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TabControl TabStripPlacement="Top" >
+        <TabControl TabStripPlacement="Top" 
+                    SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="General">
                 <Grid>
                     <TextBlock FontWeight="Bold" Text="Restaurant Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
@@ -23,16 +24,16 @@
 
                     <Border VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Padding="10">
                         <StackPanel>
-                            <TextBlock FontWeight="Bold" FontSize="18">User Management</TextBlock>
+                            <TextBlock FontWeight="Bold" FontSize="18" TextWrapping="Wrap">User Management</TextBlock>
                             <TextBlock TextWrapping="Wrap" Margin="7">Configure the users who have access to the application.</TextBlock>
-                            <Button>Create User</Button>
+                            <Button x:Name="userCreate" Background="#FF53C753" Foreground="White" BorderBrush="#FF53C753" Click="userCreate_Click" Margin="0,5" Content="Create User"/>
                             <Button IsEnabled="False">Modify User</Button>
                             <Button IsEnabled="False">Delete User</Button>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Column="1" Padding="20">
-                        <DataGrid/>
+                        <DataGrid Name="DataGridUsers" IsReadOnly="True" SelectedIndex="0" ColumnWidth="100*" />
                     </Border>
                 </Grid>
 
