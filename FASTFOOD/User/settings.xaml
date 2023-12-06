@@ -8,14 +8,15 @@
         Title="Configuración" Height="450" Width="800" MinHeight="450" MinWidth="550" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TabControl TabStripPlacement="Top" 
-                    SelectionChanged="TabControl_SelectionChanged">
+                    SelectionChanged="TabControl_SelectionChanged"
+                    x:Name="SettingsTabControl">
             <TabItem Header="General">
                 <Grid>
                     <TextBlock FontWeight="Bold" Text="Restaurant Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
                     <TextBox  x:Name="restaurant" Margin="10,31,0,0" HorizontalAlignment="Left" Width="120" Height="24" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Users" Name="users" >
+            <TabItem Header="Users" Name="users" Height="20" VerticalAlignment="Top" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30*"/>
@@ -26,14 +27,25 @@
                         <StackPanel>
                             <TextBlock FontWeight="Bold" FontSize="18" TextWrapping="Wrap">User Management</TextBlock>
                             <TextBlock TextWrapping="Wrap" Margin="7">Configure the users who have access to the application.</TextBlock>
-                            <Button x:Name="userCreate" Background="#FF53C753" Foreground="White" BorderBrush="#FF53C753" Click="userCreate_Click" Margin="0,5" Content="Create User"/>
-                            <Button IsEnabled="False">Modify User</Button>
-                            <Button IsEnabled="False">Delete User</Button>
+                            <Button x:Name="userCreate"  Background="#FF53C753" Foreground="White" BorderBrush="#FF53C753" Click="userCreate_Click" Margin="0,5" Content="Create User"/>
+                            <Button x:Name="userModify"  Background="#FF53C753" Foreground="White" BorderBrush="#FF53C753" Click="userModify_Click" IsEnabled="False" Margin="0,5" Content="Update User"/>
+                            <Button x:Name="userDelete"  Background="#FF53C753" Foreground="White" BorderBrush="#FF53C753" Click="userDelete_Click" IsEnabled="False" Margin="0,5" Content="Delete User"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Column="1" Padding="20">
-                        <DataGrid Name="DataGridUsers" IsReadOnly="True" SelectedIndex="0" ColumnWidth="100*" />
+                        <DataGrid Name="DataGridUsers" IsReadOnly="True" ColumnWidth="100*" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="DataGridUsers_SelectionChanged">
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="Blue"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
                     </Border>
                 </Grid>
 

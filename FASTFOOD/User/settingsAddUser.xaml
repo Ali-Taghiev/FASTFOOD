@@ -20,6 +20,7 @@
             <PasswordBox x:Name="userPassword" FontSize="14"></PasswordBox>
         </StackPanel>
         <Button x:Name="userCreate" Click="userCreate_Click" Content="Create User" HorizontalAlignment="Center" Margin="0,0,0,20" VerticalAlignment="Bottom" Padding="15" Background="#FF53C753" Foreground="White" BorderBrush="#FF53C753" FontWeight="Bold" FontSize="12.5">
+
         </Button>
     </Grid>
 </Window>

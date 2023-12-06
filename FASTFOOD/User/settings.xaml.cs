@@ -22,6 +22,8 @@ namespace FASTFOOD.User
   
     public partial class settings : Window
     {
+
+        private string UsersDataGridSelected;
         public settings()
         {
             InitializeComponent();
@@ -62,6 +64,7 @@ namespace FASTFOOD.User
                     DataGridUsers.ItemsSource = table.DefaultView;
                     DataGridUsers.AutoGenerateColumns = true;
                     DataGridUsers.CanUserAddRows = false;
+                    DataGridUsers.UpdateLayout();
                 }
                 catch (Exception exc)
                 {
@@ -79,10 +82,77 @@ namespace FASTFOOD.User
             }
         }
 
-        private void userCreate_Click(object sender, RoutedEventArgs e)
+        
+            private void userCreate_Click(object sender, RoutedEventArgs e)
+            {
+                new settingsAddUser().ShowDialog();
+                Dispatcher.BeginInvoke((Action)(() => SettingsTabControl.SelectedIndex = SettingsTabControl.SelectedIndex));
+            }
+
+
+        private void DataGridUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            new settingsAddUser().ShowDialog();
+            DataRowView row = (DataRowView)DataGridUsers.SelectedItem;
+            if (row != null)
+            {
+                userDelete.IsEnabled = true;
+                userModify.IsEnabled = true;
+                UsersDataGridSelected = row["Username"].ToString();
+            }
+            else
+            {
+                userDelete.IsEnabled = false;
+                userModify.IsEnabled = false;
+            }
+        }
+
+
+
+
+        private void userModify_Click(object sender, RoutedEventArgs e)
+        {
             
+        }
+
+        private void userDelete_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show($"You are about to delete the user {UsersDataGridSelected}\nAre you sure?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    SqlConnectionConfiguration config = new SqlConnectionConfiguration();
+                    
+                    String connectionString = config.GetConnectionString();
+                    using (SqlConnection con = new SqlConnection(connectionString))
+                    {
+                        con.Open();
+                        string query = "DELETE FROM Users WHERE username = @username";
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@username", UsersDataGridSelected);
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("User deleted successfully.");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error deleting the user.");
+                            }
+                        }
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message.ToString());
+                }
+                finally
+                {
+                    Dispatcher.BeginInvoke((Action)(() => SettingsTabControl.SelectedIndex = SettingsTabControl.SelectedIndex));
+                }
+            }
         }
     }
 }
