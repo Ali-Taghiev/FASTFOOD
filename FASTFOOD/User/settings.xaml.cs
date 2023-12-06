@@ -82,32 +82,54 @@ namespace FASTFOOD.User
             }
         }
 
-        
-            private void userCreate_Click(object sender, RoutedEventArgs e)
-            {
-                new settingsAddUser().ShowDialog();
-                Dispatcher.BeginInvoke((Action)(() => SettingsTabControl.SelectedIndex = SettingsTabControl.SelectedIndex));
-            }
+
 
 
         private void DataGridUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataRowView row = (DataRowView)DataGridUsers.SelectedItem;
-            if (row != null)
+            // Check if the event was triggered by a user action
+            if (e.AddedItems.Count > 0)
             {
-                userDelete.IsEnabled = true;
-                userModify.IsEnabled = true;
-                UsersDataGridSelected = row["Username"].ToString();
-            }
-            else
-            {
-                userDelete.IsEnabled = false;
-                userModify.IsEnabled = false;
+                DataRowView row = (DataRowView)DataGridUsers.SelectedItem;
+                if (row != null)
+                {
+                    userDelete.IsEnabled = true;
+                    userModify.IsEnabled = true;
+                    UsersDataGridSelected = row["username"].ToString();
+                    MessageBox.Show($"Selected: {UsersDataGridSelected}");
+
+                    // Set the background color explicitly after showing MessageBox
+                    DataGridRow selectedRow = (DataGridRow)DataGridUsers.ItemContainerGenerator.ContainerFromItem(DataGridUsers.SelectedItem);
+                    if (selectedRow != null)
+                    {
+                        selectedRow.Background = Brushes.Blue;
+                        selectedRow.Foreground = Brushes.White;
+                    }
+                }
+                else
+                {
+                    userDelete.IsEnabled = false;
+                    userModify.IsEnabled = false;
+                    MessageBox.Show("No row selected.");
+                }
             }
         }
 
 
 
+
+
+
+
+
+
+
+
+        private void userCreate_Click(object sender, RoutedEventArgs e)
+        {
+            new settingsAddUser().ShowDialog();
+            Dispatcher.BeginInvoke((Action)(() => SettingsTabControl.SelectedIndex = SettingsTabControl.SelectedIndex));
+        }
 
         private void userModify_Click(object sender, RoutedEventArgs e)
         {
