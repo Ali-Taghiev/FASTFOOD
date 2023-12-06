@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace FASTFOOD.User
 {
@@ -41,47 +42,11 @@ namespace FASTFOOD.User
         {
             if (users.IsSelected)
             {
-                SqlConnection con = null;
-                try
-                {
-                    
-                    String query = "SELECT username as 'Username', name as 'Name', email as 'e-mail' FROM Users";
-
-                    // Get SQL Server connection details
-                    SqlConnectionConfiguration config = new SqlConnectionConfiguration();
-                    string connectionString = config.GetConnectionString();
-
-                    // Create and open a connection to the SQL Server
-                    con = new SqlConnection(connectionString);
-                    con.Open();
-
-                    // Use SqlDataAdapter to fill a DataTable with the query results
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, con);
-                    DataTable table = new DataTable();
-                    adapter.Fill(table);
-
-                    // Populate the DataGrid with the DataTable
-                    DataGridUsers.ItemsSource = table.DefaultView;
-                    DataGridUsers.AutoGenerateColumns = true;
-                    DataGridUsers.CanUserAddRows = false;
-                    DataGridUsers.UpdateLayout();
-                }
-                catch (Exception exc)
-                {
-                    // Handle any exceptions and print the error message
-                    Console.WriteLine(exc.Message.ToString());
-                }
-                finally
-                {
-                    // Close the connection in the finally block to ensure it is closed regardless of exceptions
-                    if (con != null && con.State == System.Data.ConnectionState.Open)
-                    {
-                        con.Close();
-                    }
-                }
+                GetFromUsers();
             }
         }
 
+       
 
 
 
@@ -96,7 +61,8 @@ namespace FASTFOOD.User
                     userDelete.IsEnabled = true;
                     userModify.IsEnabled = true;
                     UsersDataGridSelected = row["username"].ToString();
-                    MessageBox.Show($"Selected: {UsersDataGridSelected}");
+
+                    
 
                     // Set the background color explicitly after showing MessageBox
                     DataGridRow selectedRow = (DataGridRow)DataGridUsers.ItemContainerGenerator.ContainerFromItem(DataGridUsers.SelectedItem);
@@ -110,7 +76,7 @@ namespace FASTFOOD.User
                 {
                     userDelete.IsEnabled = false;
                     userModify.IsEnabled = false;
-                    MessageBox.Show("No row selected.");
+                  
                 }
             }
         }
@@ -125,10 +91,13 @@ namespace FASTFOOD.User
 
 
 
+
+
         private void userCreate_Click(object sender, RoutedEventArgs e)
         {
             new settingsAddUser().ShowDialog();
-            Dispatcher.BeginInvoke((Action)(() => SettingsTabControl.SelectedIndex = SettingsTabControl.SelectedIndex));
+            DataGridUsers.ItemsSource = null;
+            GetFromUsers();
         }
 
         private void userModify_Click(object sender, RoutedEventArgs e)
@@ -157,7 +126,11 @@ namespace FASTFOOD.User
 
                             if (rowsAffected > 0)
                             {
+
                                 MessageBox.Show("User deleted successfully.");
+                                DataGridUsers.ItemsSource = null;
+                                GetFromUsers();
+
                             }
                             else
                             {
@@ -173,6 +146,48 @@ namespace FASTFOOD.User
                 finally
                 {
                     Dispatcher.BeginInvoke((Action)(() => SettingsTabControl.SelectedIndex = SettingsTabControl.SelectedIndex));
+                }
+            }
+        }
+
+        private void GetFromUsers()
+        {
+            SqlConnection con = null;
+            try
+            {
+
+                String query = "SELECT username as 'Username', name as 'Name', email as 'e-mail' FROM Users";
+
+                // Get SQL Server connection details
+                SqlConnectionConfiguration config = new SqlConnectionConfiguration();
+                string connectionString = config.GetConnectionString();
+
+                // Create and open a connection to the SQL Server
+                con = new SqlConnection(connectionString);
+                con.Open();
+
+                // Use SqlDataAdapter to fill a DataTable with the query results
+                SqlDataAdapter adapter = new SqlDataAdapter(query, con);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                // Populate the DataGrid with the DataTable
+                DataGridUsers.ItemsSource = table.DefaultView;
+                DataGridUsers.AutoGenerateColumns = true;
+                DataGridUsers.CanUserAddRows = false;
+
+            }
+            catch (Exception exc)
+            {
+                // Handle any exceptions and print the error message
+                Console.WriteLine(exc.Message.ToString());
+            }
+            finally
+            {
+                // Close the connection in the finally block to ensure it is closed regardless of exceptions
+                if (con != null && con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
                 }
             }
         }

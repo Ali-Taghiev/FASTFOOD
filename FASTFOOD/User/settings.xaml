@@ -35,8 +35,18 @@
 
                     <Border Grid.Column="1" Padding="20">
                         <DataGrid Name="DataGridUsers" IsReadOnly="False" ColumnWidth="100*" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="DataGridUsers_SelectionChanged">
-                            
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="Blue"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
                         </DataGrid>
+
                     </Border>
                 </Grid>
 
