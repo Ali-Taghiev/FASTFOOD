@@ -97,20 +97,22 @@ namespace FASTFOOD.User
         {
             new settingsAddUser().ShowDialog();
             DataGridUsers.ItemsSource = null;
-            GetFromUsers();
+            RefreshDataGridView();
         }
 
         private void userModify_Click(object sender, RoutedEventArgs e)
         {
-            // Assuming you have a valid string to pass to the constructor
-            string usernameToModify = "Ali"; // Replace this with the actual username
+           
+               
 
-            // Create an instance of settingModifyUsers and pass the username as a parameter
-            settingModifyUsers modifyUsersWindow = new settingModifyUsers(usernameToModify);
+                // Create an instance of settingModifyUsers and pass the username as a parameter
+                settingModifyUsers modifyUsersWindow = new settingModifyUsers(UsersDataGridSelected);
 
-            // Show the window
-            modifyUsersWindow.ShowDialog();
+                // Show the window
+                modifyUsersWindow.ShowDialog();
+            
         }
+
 
 
         private void userDelete_Click(object sender, RoutedEventArgs e)
@@ -136,8 +138,8 @@ namespace FASTFOOD.User
                             {
 
                                 MessageBox.Show("User deleted successfully.");
-                                DataGridUsers.ItemsSource = null;
-                                GetFromUsers();
+                              
+                                RefreshDataGridView();
 
                             }
                             else
@@ -158,6 +160,10 @@ namespace FASTFOOD.User
             }
         }
 
+        internal void RefreshDataGridView()
+        {
+            GetFromUsers();
+        }
         private void GetFromUsers()
         {
             SqlConnection con = null;
@@ -180,6 +186,7 @@ namespace FASTFOOD.User
                 adapter.Fill(table);
 
                 // Populate the DataGrid with the DataTable
+                DataGridUsers.ItemsSource =null;
                 DataGridUsers.ItemsSource = table.DefaultView;
                 DataGridUsers.AutoGenerateColumns = true;
                 DataGridUsers.CanUserAddRows = false;

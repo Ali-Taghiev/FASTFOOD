@@ -26,7 +26,7 @@ namespace FASTFOOD.User
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     con.Open();
-                    string query = "SELECT username, name, email FROM users WHERE username = @userOriginal;";
+                    string query = "SELECT username, name, email FROM Users WHERE username = @userOriginal;";
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@userOriginal", userOriginal);
@@ -65,11 +65,11 @@ namespace FASTFOOD.User
                         string query;
                         if (userPassword.Password == "")
                         {
-                            query = "UPDATE users SET name = @name, username = @username, email = @email WHERE username = @userOriginal;";
+                            query = "UPDATE Users SET name = @name, username = @username, email = @email WHERE username = @userOriginal;";
                         }
                         else
                         {
-                            query = "UPDATE users SET name = @name, username = @username, password = @password, email = @email WHERE username = @userOriginal;";
+                            query = "UPDATE Users SET name = @name, username = @username, password = @password, email = @email WHERE username = @userOriginal;";
                         }
 
                         using (SqlCommand cmd = new SqlCommand(query, con))
@@ -78,13 +78,18 @@ namespace FASTFOOD.User
                             cmd.Parameters.AddWithValue("@username", userUsername.Text);
                             cmd.Parameters.AddWithValue("@password", GetSHA256Hash(userPassword.Password));
                             cmd.Parameters.AddWithValue("@email", userMail.Text);
-                            
+                            cmd.Parameters.AddWithValue("@userOriginal", userOriginal);
+
                             int rowsAffected = cmd.ExecuteNonQuery();
 
                             if (rowsAffected > 0)
                             {
                                 MessageBox.Show("Changes saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                               
                                 this.Close();
+                                settings settingsPage = new settings();
+                                settingsPage.RefreshDataGridView();
+
                             }
                             else
                             {
@@ -102,6 +107,8 @@ namespace FASTFOOD.User
             {
                 MessageBox.Show("You must complete all fields.", "Incomplete Data", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            
         }
 
         private string GetSHA256Hash(string input)
