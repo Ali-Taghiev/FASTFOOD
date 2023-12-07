@@ -26,15 +26,15 @@
                                 <Label  FontWeight="DemiBold" FontSize="13" x:Name="lbl_Governance" Foreground="White" Margin="15,0,0,0" />
                             </DockPanel>
                         </Button>
-                        <Button Height="60" Background="Transparent" x:Name="btnScan" BorderThickness="0">
+                        <Button Height="60" Click="btnTables_Click" Background="Transparent" x:Name="btnTables" BorderThickness="0">
                             <DockPanel  Margin="20,0,0,0">
                                 <Image Source="/User/Icons/KnifeIcon.ico" Width="20" />
                                 <Label Content="Tables" Foreground="White" FontWeight="DemiBold" FontSize="13" Margin="15,0,0,0"/>
                             </DockPanel>
                         </Button>
-                        <Button Height="60" Background="Transparent" x:Name="btnMenu" BorderThickness="0">
+                        <Button Height="60" Background="DarkGreen" x:Name="btnMenu" BorderThickness="0">
                             <DockPanel  Margin="20,0,0,0">
-                                <Image Source="/User/Icons/KnifeIcon.ico" Width="20" />
+                                <Image Source="/User/Icons/other.ico" Width="20" />
                                 <Label Content="Manage letter" Foreground="White" FontWeight="DemiBold" FontSize="13" Margin="15,0,0,0"/>
                             </DockPanel>
                         </Button>
@@ -47,7 +47,7 @@
                                 <Label Content="Settings" Foreground="White" FontWeight="SemiBold" FontSize="13"  x:Name="lbl_Issues" Margin="15,0,0,0"/>
                             </DockPanel>
                         </Button>
-
+                       
                         <Button Height="60" Background="Transparent" x:Name="btnExit" Click="btnExit_Click" BorderThickness="0">
                             <DockPanel  Margin="20,0,0,0">
                                 <Image Source="/User/Icons/LogOutIcon.ico" Width="20" />
@@ -65,7 +65,7 @@
                     <RowDefinition Height="60px" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Border Background="White">
+                <Border Background="White" Panel.ZIndex="100">
                     <Grid Margin="15,0">
                         <Image Source="DashBoardImage.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,5" Height="36" />
                         <TextBlock FontFamily="/FastFood;component/Resources/#Contrail One" FontSize="34" Text="FastFood" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="38,0,0,0"></TextBlock>
@@ -85,16 +85,8 @@
                 </Border>
 
 
-                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                    <Grid Height="3024">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="295*"/>
-                            <RowDefinition Height="2729*"/>
-                        </Grid.RowDefinitions>
-                        <Label FontSize="28px" FontWeight="Bold" Grid.RowSpan="2">Example</Label>
-                        <Label Margin="0,45,0,0" Grid.RowSpan="2">Example</Label>
-                    </Grid>
-                </ScrollViewer>
+                <ScrollViewer x:Name="contentContainer" Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto"/>
             </Grid>
 
         </Grid>

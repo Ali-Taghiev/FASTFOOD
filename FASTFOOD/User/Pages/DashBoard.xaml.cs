@@ -70,7 +70,10 @@ namespace FASTFOOD.User
             settings form = new settings();
             form.ShowDialog();
         }
-
+        private void btnTables_Click(object sender, RoutedEventArgs e)
+        {
+            contentContainer.Content = new User.Pages.Tables();
+        }
 
     }
 }
