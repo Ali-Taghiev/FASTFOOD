@@ -100,7 +100,17 @@ namespace FASTFOOD.User
             GetFromUsers();
         }
 
-       
+        private void userModify_Click(object sender, RoutedEventArgs e)
+        {
+            // Assuming you have a valid string to pass to the constructor
+            string usernameToModify = "Ali"; // Replace this with the actual username
+
+            // Create an instance of settingModifyUsers and pass the username as a parameter
+            settingModifyUsers modifyUsersWindow = new settingModifyUsers(usernameToModify);
+
+            // Show the window
+            modifyUsersWindow.ShowDialog();
+        }
 
 
         private void userDelete_Click(object sender, RoutedEventArgs e)
