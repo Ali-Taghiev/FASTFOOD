@@ -6,9 +6,7 @@ using System.Windows;
 
 namespace FASTFOOD.User
 {
-    /// <summary>
-    /// Interaction logic for settingsAddUser.xaml
-    /// </summary>
+    
     public partial class settingsAddUser : Window
     {
         public settingsAddUser()

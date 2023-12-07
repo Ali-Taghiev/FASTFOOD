@@ -100,10 +100,8 @@ namespace FASTFOOD.User
             GetFromUsers();
         }
 
-        private void userModify_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
+       
+
 
         private void userDelete_Click(object sender, RoutedEventArgs e)
         {
