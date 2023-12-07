@@ -1,6 +1,4 @@
-﻿// In Table_Button.xaml.cs
-
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace FASTFOOD.User.Components
@@ -26,11 +24,21 @@ namespace FASTFOOD.User.Components
         // Loaded event handler for Table_Button
         private void Table_Button_Loaded(object sender, RoutedEventArgs e)
         {
-            // Your logic when the Table_Button is loaded goes here
-            // For example, you can display the TableNumber in a MessageBox
+          
             MessageBox.Show($"Table {TableNumber} loaded.");
         }
+       
 
-        // ... (your other properties and methods)
+
+        public bool Service
+        {
+            get { return (bool)GetValue(ServiceProperty); }
+            set { SetValue(ServiceProperty, value); }
+        }
+
+        public static DependencyProperty ServiceProperty =
+           DependencyProperty.Register("Service", typeof(bool), typeof(Table_Button));
+    
+
     }
 }

@@ -1,5 +1,4 @@
 ﻿using FASTFOOD.Models;
-using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
 
@@ -7,28 +6,19 @@ namespace FASTFOOD.User.Pages
 {
     public partial class Tables : UserControl
     {
+        public List<Table> NumberButtonItems { get; set; }
+
         public Tables()
         {
             InitializeComponent();
             LoadData();
+            DataContext = this; // Set the DataContext to the current instance of the Tables class
         }
 
         private void LoadData()
         {
             SqlConnectionConfiguration config = new SqlConnectionConfiguration();
-            List<Table> tables = config.GetTables();
-            List<Service> services = config.GetServices();
-
-            // Clear the existing items
-            numberButtonItems.Items.Clear();
-
-            // Set the new ItemsSource
-            numberButtonItems.ItemsSource = tables;
-
-            // Do similar binding for services if needed
-            // e.g., DataGridServices.ItemsSource = services;
+            NumberButtonItems = config.GetTables();
         }
-
-
     }
 }
