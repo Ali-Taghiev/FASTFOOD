@@ -6,6 +6,7 @@
     xmlns:components="clr-namespace:FASTFOOD.User.Components"
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="59*"/>
@@ -21,12 +22,13 @@
                 <DataTemplate>
                     <components:Table_Button
                         Padding="5" Margin="39,37,0,0"
-                       
+                        
                         Grid.RowSpan="2"
                         HorizontalAlignment="Left" Width="300" Height="200" VerticalAlignment="Top"
-                        TableNumber="{Binding id}"
-                        Service="{Binding actualServiceID}"
+                        TableNumber="{Binding Id}"
+                        Service="{Binding ActualServiceId}"
                         />
+
 
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

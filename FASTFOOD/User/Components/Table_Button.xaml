@@ -5,13 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FASTFOOD.User.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="400" >
-    <Border  Background="#FF00AAC5" BorderBrush="#FFDA0101" BorderThickness="4" CornerRadius="5">
+             d:DesignHeight="250" d:DesignWidth="400">
+    <Border Background="#FF00AAC5" BorderBrush="#FFDA0101" BorderThickness="4" CornerRadius="5">
         <Grid>
-            <TextBlock x:Name="tableID" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="45">0</TextBlock>
-            <Border x:Name="serviceON"  Background="#FFF0CF00" Padding="20, 2" CornerRadius="10" Margin="0,15" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-                <TextBlock FontWeight="Medium"  Foreground="Black">Service</TextBlock>
-            </Border>
+            <TextBlock x:Name="tableID" 
+                       Text="{Binding TableNumber, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Table_Button}}}"
+                       Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="45">
+            </TextBlock>
+
+            <TextBlock x:Name="serviceID" 
+                       Text="{Binding Service, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Table_Button}}}"
+                       Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="45">
+            </TextBlock>
         </Grid>
         <Border.BitmapEffect>
             <DropShadowBitmapEffect Color="Black" Direction="-90" Softness="0.5" ShadowDepth="10" Opacity="0.4" />
