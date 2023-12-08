@@ -5,11 +5,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:components="clr-namespace:FASTFOOD.User.Components"
     xmlns:fastfood="clr-namespace:FASTFOOD.Converters"
-
+    xmlns:converters="clr-namespace:FASTFOOD.Converters"
     mc:Ignorable="d" 
     x:Name="tablesTab">
     <UserControl.Resources>
         <fastfood:EqualsConverter x:Key="EqualsConverter" />
+        <converters:NegateBooleanConverter x:Key="inverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
 
     <Grid Background="White">
@@ -21,7 +23,9 @@
             <TextBlock FontSize="16" FontWeight="SemiBold">Total:</TextBlock>
             <TextBlock Text="{Binding SelectedTable, ElementName=tablesTab}"/>
             <TextBlock FontSize="24" FontWeight="Bold">49.99$</TextBlock>
-            <Button x:Name="serviceStart" Click="serviceStart_Click" Content="Start Order" Padding="0,5" Margin="0,5"  Background="#66c433" Foreground="White" BorderBrush="#66c433" FontWeight="Bold" FontSize="12.5">
+            <Button x:Name="serviceStart" Click="serviceStart_Click"
+                    IsEnabled="{Binding SelectedService, ElementName=tablesTab, Converter= {StaticResource inverter}}"
+                    Content="Start Order" Padding="0,5" Margin="0,5"  Background="#66c433" Foreground="White" BorderBrush="#66c433" FontWeight="Bold" FontSize="12.5">
                 <Button.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="0" Softness="0.5" ShadowDepth="0" Opacity="0.4" />
                 </Button.BitmapEffect>
@@ -31,7 +35,9 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="productAdd" Content="Add Product" Padding="0,5" Margin="0,5"  Background="#05aeff" Foreground="White" BorderBrush="#05aeff" FontWeight="Bold" FontSize="12.5">
+            <Button x:Name="productAdd" Content="Add Product" 
+                    Visibility="{Binding SelectedService, ElementName=tablesTab, Converter= {StaticResource BoolToVis}}"
+                    Padding="0,5" Margin="0,5"  Background="#05aeff" Foreground="White" BorderBrush="#05aeff" FontWeight="Bold" FontSize="12.5">
                 <Button.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="0" Softness="0.5" ShadowDepth="0" Opacity="0.4" />
                 </Button.BitmapEffect>
@@ -41,7 +47,9 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="serviceFinish" Content="Finish Order" Click="serviceFinish_Click" Padding="0,5" Margin="0,5"  Background="#cc0000" Foreground="White" BorderBrush="#cc0000" FontWeight="Bold" FontSize="12.5">  
+            <Button x:Name="serviceFinish" Content="Finish Order"
+                    Visibility="{Binding SelectedService, ElementName=tablesTab, Converter= {StaticResource BoolToVis}}"
+                    Click="serviceFinish_Click" Padding="0,5" Margin="0,5"  Background="#cc0000" Foreground="White" BorderBrush="#cc0000" FontWeight="Bold" FontSize="12.5">  
                 <Button.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="0" Softness="0.5" ShadowDepth="0" Opacity="0.4" />
                 </Button.BitmapEffect>

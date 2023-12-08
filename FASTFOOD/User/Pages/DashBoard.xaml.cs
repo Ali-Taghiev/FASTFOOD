@@ -26,6 +26,7 @@ namespace FASTFOOD.User
         public DashBoard()
         {
             InitializeComponent();
+            contentContainer.Content = new User.Pages.Tables();
         }
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {

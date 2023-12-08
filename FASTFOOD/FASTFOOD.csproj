@@ -59,8 +59,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\EqualsConverter.cs" />
+    <Compile Include="Converters\NegateBooleanConverter.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\Table.cs" />
+    <Compile Include="Product_Selection.xaml.cs">
+      <DependentUpon>Product_Selection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SqlConnectionConfiguration.cs" />
     <Compile Include="User\Components\Table_Button.xaml.cs">
       <DependentUpon>Table_Button.xaml</DependentUpon>
@@ -95,6 +100,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Product_Selection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="User\Components\Table_Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

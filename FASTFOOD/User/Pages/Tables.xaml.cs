@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -15,7 +16,8 @@ namespace FASTFOOD.User.Pages
 {
     public partial class Tables : UserControl, INotifyPropertyChanged
     {
-        public List<Table> NumberButtonItems { get; set; }
+        public List<FASTFOOD.Models.Table> NumberButtonItems { get; set; }
+
 
         public Tables()
         {
@@ -61,6 +63,22 @@ namespace FASTFOOD.User.Pages
         public event PropertyChangedEventHandler PropertyChanged;
 
 
+        public Boolean SelectedService
+        {
+            get
+            {
+                NotifyPropertyChanged("Title");
+                return (Boolean)GetValue(SelectedServiceProperty);
+            }
+            set
+            {
+                SetValue(SelectedServiceProperty, value);
+            }
+        }
+
+        public static DependencyProperty SelectedServiceProperty =
+           DependencyProperty.Register("SelectedService", typeof(Boolean), typeof(Tables));
+
 
 
         private void Table_Button_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -73,6 +91,9 @@ namespace FASTFOOD.User.Pages
                 var tableNumber = tableButton.GetValue(Components.Table_Button.TableNumberProperty);
                 MessageBox.Show(tableNumber.ToString());
                 SelectedTable = tableNumber.ToString();
+
+                var Service = tableButton.GetValue(Table_Button.ServiceProperty);
+                SelectedService = Boolean.Parse(Service.ToString());
 
                 // Mark the event as handled to prevent it from propagating further up the visual tree
                 e.Handled = true;
@@ -284,7 +305,11 @@ namespace FASTFOOD.User.Pages
             }
         }
 
-
+        private void productAdd_Click(object sender, RoutedEventArgs e)
+        {
+            new Product_Selection(SelectedTable.ToString()).ShowDialog();
+            LoadData();
+        }
 
 
     }
