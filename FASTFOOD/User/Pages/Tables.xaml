@@ -4,40 +4,90 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:components="clr-namespace:FASTFOOD.User.Components"
-    mc:Ignorable="d" 
-    d:DesignHeight="450" d:DesignWidth="800">
+    xmlns:fastfood="clr-namespace:FASTFOOD.Converters"
 
-    <Grid Background="White" PreviewMouseLeftButtonDown="Table_Button_PreviewMouseLeftButtonDown"  >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="118*"/>
-            <RowDefinition Height="26*"/>
-            <RowDefinition Height="43*"/>
-            <RowDefinition Height="263*"/>
-        </Grid.RowDefinitions>
-        <ItemsControl x:Name="numberButtonItems" ItemsSource="{Binding NumberButtonItems}">
+    mc:Ignorable="d" 
+    x:Name="tablesTab">
+    <UserControl.Resources>
+        <fastfood:EqualsConverter x:Key="EqualsConverter" />
+    </UserControl.Resources>
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" MaxWidth="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel VerticalAlignment="Bottom" Margin="15,75"  Background="White" Grid.Column="0" Height="500" >
+            <TextBlock FontSize="16" FontWeight="SemiBold">Total:</TextBlock>
+            <TextBlock Text="{Binding SelectedTable, ElementName=tablesTab}"/>
+            <TextBlock FontSize="24" FontWeight="Bold">49.99$</TextBlock>
+            <Button x:Name="serviceStart" Click="serviceStart_Click" Content="Start Order" Padding="0,5" Margin="0,5"  Background="#66c433" Foreground="White" BorderBrush="#66c433" FontWeight="Bold" FontSize="12.5">
+                <Button.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="0" Softness="0.5" ShadowDepth="0" Opacity="0.4" />
+                </Button.BitmapEffect>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="productAdd" Content="Add Product" Padding="0,5" Margin="0,5"  Background="#05aeff" Foreground="White" BorderBrush="#05aeff" FontWeight="Bold" FontSize="12.5">
+                <Button.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="0" Softness="0.5" ShadowDepth="0" Opacity="0.4" />
+                </Button.BitmapEffect>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="serviceFinish" Content="Finish Order" Padding="0,5" Margin="0,5"  Background="#cc0000" Foreground="White" BorderBrush="#cc0000" FontWeight="Bold" FontSize="12.5">  
+                <Button.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="0" Softness="0.5" ShadowDepth="0" Opacity="0.4" />
+                </Button.BitmapEffect>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+        <ItemsControl  x:Name="TablesList" Grid.Column="1" ItemsSource="{Binding Path=LoadDataBinding}">
             <ItemsControl.ItemsPanel>
+                <!-- specify the panel that is the container for your items -->
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="4" HorizontalAlignment="Stretch" />
+                    <UniformGrid  Columns="3" HorizontalAlignment="Stretch" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <!-- specify the template used to render each item -->
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <components:Table_Button
-                        Padding="5" Margin="39,37,0,0"
-                        
-                        Grid.RowSpan="2"
-                        HorizontalAlignment="Left" Width="300" Height="200" VerticalAlignment="Top"
-                        TableNumber="{Binding Id}"
-                        Service="{Binding ActualServiceId}"
-                        />
+                    <!--Button Content="{Binding Value}"/-->
+                    <Border Margin="5" HorizontalAlignment="Center" Width="250" Height="150" VerticalAlignment="Center" Background="#FF00AAC5" BorderBrush="#FFDA0101" CornerRadius="5">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="BorderThickness" Value="0"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Value="True">
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource EqualsConverter}" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding Path="SelectedTable" ElementName="tablesTab"/>
+                                                <Binding Path="id"/>
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
 
+                                        <Setter Property="BorderThickness" Value="4" />
+                                    </DataTrigger>
+                                </Style.Triggers>
 
+                            </Style>
+
+                        </Border.Style>
+                        <components:Table_Button TableNumber="{Binding Id}" Service="{Binding ActualServiceId}" PreviewMouseLeftButtonDown="Table_Button_PreviewMouseLeftButtonDown"/>
+
+                    </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
-        <Grid.BitmapEffect>
-            <DropShadowBitmapEffect Color="Black" Direction="0" Softness="1" ShadowDepth="0" Opacity="0.2" />
-        </Grid.BitmapEffect>
     </Grid>
 </UserControl>

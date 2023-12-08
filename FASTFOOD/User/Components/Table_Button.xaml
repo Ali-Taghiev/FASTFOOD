@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FASTFOOD.User.Components"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="400">
-    <Border Background="#FF00AAC5" BorderBrush="#FFDA0101" BorderThickness="4" CornerRadius="5"  >
+    <Border Background="Transparent"  >
         <Grid >
             <TextBlock x:Name="tableID" 
                        Text="{Binding TableNumber, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Table_Button}}}"

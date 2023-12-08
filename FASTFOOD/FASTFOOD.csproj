@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\EqualsConverter.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="SqlConnectionConfiguration.cs" />
