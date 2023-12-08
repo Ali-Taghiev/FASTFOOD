@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using FASTFOOD.User.Pages;
+using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace FASTFOOD.User.Components
@@ -27,5 +29,6 @@ namespace FASTFOOD.User.Components
         {
             InitializeComponent();
         }
+            
     }
 }
