@@ -203,6 +203,89 @@ namespace FASTFOOD.User.Pages
 
         }
 
+        private void serviceFinish_Click(object sender, RoutedEventArgs e)
+        {
+            Boolean setTime = false;
+
+            String query;
+            SqlCommand cmd;
+            SqlConnection con = null;
+
+            // Update service
+            try
+            {
+                // Create an instance of SqlConnectionConfiguration
+                SqlConnectionConfiguration connectionConfig = new SqlConnectionConfiguration();
+
+                // Establish connection
+                using (con = connectionConfig.GetSqlConnection())
+                {
+                    con.Open();
+
+                    // Update end time in the services table
+                    query = "UPDATE Services SET [end] = CURRENT_TIMESTAMP WHERE Services.id = (SELECT actualServiceID FROM tables WHERE id = 1)";
+                    cmd = new SqlCommand(query, con);
+
+                    // Use ExecuteNonQuery since no result set is expected
+                    cmd.ExecuteNonQuery();
+
+                    setTime = true;
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("There was an error closing the service: \n" + exc.Message.ToString() + ".", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+            }
+
+            // Assign to the current table
+            if (setTime)
+            {
+                try
+                {
+                    // Create an instance of SqlConnectionConfiguration
+                    SqlConnectionConfiguration connectionConfig = new SqlConnectionConfiguration();
+
+                    // Establish connection
+                    using (con = connectionConfig.GetSqlConnection())
+                    {
+                        con.Open();
+                        
+                        // Clear actualServiceID in the tables table
+                        query = "UPDATE tables SET actualServiceID = null WHERE tables.id = @selectedTableID;";
+                        cmd = new SqlCommand(query, con);
+                        cmd.Parameters.AddWithValue("@selectedTableID", SelectedTable?.ToString()); 
+
+                        // Use ExecuteNonQuery since no result set is expected
+                        cmd.ExecuteNonQuery();
+
+                        // TODO OK
+                        // Reload the view
+                        LoadData();
+                    }
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("There was an error closing the order: \n" + exc.Message.ToString() + ".", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    if (con != null)
+                    {
+                        con.Close();
+                    }
+                }
+            }
+        }
+
+
+
 
     }
 }

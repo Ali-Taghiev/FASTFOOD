@@ -41,7 +41,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="serviceFinish" Content="Finish Order" Padding="0,5" Margin="0,5"  Background="#cc0000" Foreground="White" BorderBrush="#cc0000" FontWeight="Bold" FontSize="12.5">  
+            <Button x:Name="serviceFinish" Content="Finish Order" Click="serviceFinish_Click" Padding="0,5" Margin="0,5"  Background="#cc0000" Foreground="White" BorderBrush="#cc0000" FontWeight="Bold" FontSize="12.5">  
                 <Button.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="0" Softness="0.5" ShadowDepth="0" Opacity="0.4" />
                 </Button.BitmapEffect>
